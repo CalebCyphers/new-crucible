@@ -1,55 +1,84 @@
 <script lang="ts">
-	import '../app.postcss';
-	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
+  import "../app.postcss";
+  import { AppShell, AppRail, AppRailAnchor } from "@skeletonlabs/skeleton";
+  import { page } from "$app/stores";
 
-	// Highlight JS
-	import hljs from 'highlight.js';
-	import 'highlight.js/styles/github-dark.css';
-	import { storeHighlightJs } from '@skeletonlabs/skeleton';
-	storeHighlightJs.set(hljs);
+  // Icons
+  import RocketIcon from "~icons/radix-icons/rocket";
+  import FramePersonIcon from "~icons/material-symbols/frame-person-outline";
+  import DiceIcon from "~icons/mdi/dice-multiple-outline";
 
-	// Floating UI for Popups
-	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
-	import { storePopup } from '@skeletonlabs/skeleton';
-	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
+  // Highlight JS
+  import hljs from "highlight.js";
+  import "highlight.js/styles/github-dark.css";
+  import { storeHighlightJs } from "@skeletonlabs/skeleton";
+  storeHighlightJs.set(hljs);
+
+  // Floating UI for Popups
+  import {
+    computePosition,
+    autoUpdate,
+    flip,
+    shift,
+    offset,
+    arrow,
+  } from "@floating-ui/dom";
+  import { storePopup } from "@skeletonlabs/skeleton";
+  storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
+
+  // Initialize Modal, Toast, and Drawer stores
+  import { initializeStores } from "@skeletonlabs/skeleton";
+  initializeStores();
 </script>
 
-<!-- App Shell -->
 <AppShell>
-	<svelte:fragment slot="header">
-		<!-- App Bar -->
-		<AppBar>
-			<svelte:fragment slot="lead">
-				<strong class="text-xl uppercase">Skeleton</strong>
-			</svelte:fragment>
-			<svelte:fragment slot="trail">
-				<a
-					class="btn btn-sm variant-ghost-surface"
-					href="https://discord.gg/EXqV7W8MtY"
-					target="_blank"
-					rel="noreferrer"
-				>
-					Discord
-				</a>
-				<a
-					class="btn btn-sm variant-ghost-surface"
-					href="https://twitter.com/SkeletonUI"
-					target="_blank"
-					rel="noreferrer"
-				>
-					Twitter
-				</a>
-				<a
-					class="btn btn-sm variant-ghost-surface"
-					href="https://github.com/skeletonlabs/skeleton"
-					target="_blank"
-					rel="noreferrer"
-				>
-					GitHub
-				</a>
-			</svelte:fragment>
-		</AppBar>
-	</svelte:fragment>
-	<!-- Page Route Content -->
-	<slot />
+  <svelte:fragment slot="sidebarLeft">
+    <AppRail>
+      <AppRailAnchor href="/" selected={$page.url.pathname === "/"}>
+        <svelte:fragment slot="lead">
+          <i class={"[ icon ]"}><RocketIcon /></i>
+        </svelte:fragment>
+        <span>Crew</span>
+      </AppRailAnchor>
+      <AppRailAnchor href="/me" selected={$page.url.pathname === "/me"}>
+        <svelte:fragment slot="lead">
+          <i class={"[ icon ]"}><FramePersonIcon /></i>
+        </svelte:fragment>
+        <span>Me</span></AppRailAnchor
+      >
+      <AppRailAnchor href="/docs" selected={$page.url.pathname === "/docs"}
+        ><svelte:fragment slot="lead">
+          <i class={"[ icon ]"}><DiceIcon /></i>
+        </svelte:fragment>
+        <span>Rules</span></AppRailAnchor
+      >
+    </AppRail>
+  </svelte:fragment>
+
+  <div class="[ box center ][ !py-0 ]">
+    <nav class="[ p-4 flex justify-end ]">
+      <a
+        class="[ header-anchor ]"
+        href="https://www.owlbear.rodeo/room/gaHEZ-CfigpU/TheCrucible"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <span>Owlbear Rodeo</span>
+        <span>&rarr;</span>
+      </a>
+    </nav>
+    <slot />
+  </div>
 </AppShell>
+
+<style lang="postcss">
+  .header-anchor {
+    @apply no-underline;
+    @apply text-surface-500 dark:text-surface-400;
+    @apply hover:text-surface-900 hover:dark:text-surface-50;
+  }
+
+  .icon {
+    font-size: var(--step-xl);
+  }
+</style>
