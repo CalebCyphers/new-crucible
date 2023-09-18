@@ -7,6 +7,7 @@
   import RocketIcon from "~icons/radix-icons/rocket";
   import FramePersonIcon from "~icons/material-symbols/frame-person-outline";
   import DiceIcon from "~icons/mdi/dice-multiple-outline";
+  import DatabaseIcon from "~icons/material-symbols/database-outline";
 
   // Highlight JS
   import hljs from "highlight.js";
@@ -36,17 +37,31 @@
     <AppRail>
       <AppRailAnchor href="/" selected={$page.url.pathname === "/"}>
         <svelte:fragment slot="lead">
+          <i class={"[ icon ]"}><DatabaseIcon /></i>
+        </svelte:fragment>
+        <span>Base</span>
+      </AppRailAnchor>
+      <AppRailAnchor
+        href="/crew_data"
+        selected={$page.url.pathname === "/crew_data"}
+      >
+        <svelte:fragment slot="lead">
           <i class={"[ icon ]"}><RocketIcon /></i>
         </svelte:fragment>
         <span>Crew</span>
       </AppRailAnchor>
-      <AppRailAnchor href="/me" selected={$page.url.pathname === "/me"}>
+      <AppRailAnchor
+        href="/user_profile"
+        selected={$page.url.pathname === "/user_profile"}
+      >
         <svelte:fragment slot="lead">
           <i class={"[ icon ]"}><FramePersonIcon /></i>
         </svelte:fragment>
         <span>Me</span></AppRailAnchor
       >
-      <AppRailAnchor href="/docs" selected={$page.url.pathname === "/docs"}
+      <AppRailAnchor
+        href="/rules_reference"
+        selected={$page.url.pathname === "/rules_reference"}
         ><svelte:fragment slot="lead">
           <i class={"[ icon ]"}><DiceIcon /></i>
         </svelte:fragment>
@@ -56,7 +71,7 @@
   </svelte:fragment>
 
   <div class="[ box center ][ !py-0 ]">
-    <nav class="[ p-4 flex justify-end ]">
+    <nav class="[ py-4 flex justify-end ]">
       <a
         class="[ header-anchor ]"
         href="https://www.owlbear.rodeo/room/gaHEZ-CfigpU/TheCrucible"
