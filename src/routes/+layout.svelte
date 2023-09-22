@@ -37,15 +37,6 @@
     <AppRail>
       <AppRailAnchor href="/" selected={$page.url.pathname === "/"}>
         <svelte:fragment slot="lead">
-          <i class={"[ icon ]"}><DatabaseIcon /></i>
-        </svelte:fragment>
-        <span>Base</span>
-      </AppRailAnchor>
-      <AppRailAnchor
-        href="/crew_data"
-        selected={$page.url.pathname === "/crew_data"}
-      >
-        <svelte:fragment slot="lead">
           <i class={"[ icon ]"}><RocketIcon /></i>
         </svelte:fragment>
         <span>Crew</span>
