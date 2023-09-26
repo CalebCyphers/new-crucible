@@ -1,10 +1,11 @@
 <script lang="ts">
+  import HealthSection from "../../lib/Components/HealthSection.svelte";
+
   import { writable } from "svelte/store";
   import { FileButton, ProgressBar } from "@skeletonlabs/skeleton";
   import { characterDefaults } from "$lib/characterDefaults";
-
-  // IDEA:
-  // CHOKE checks and STRUCTURE checks??
+  import { stat_traits } from "$lib/statTraits";
+  import { lancerBonds } from "$lib/lancerBonds";
 
   const character_state = writable(characterDefaults);
   let files: FileList;
@@ -76,6 +77,13 @@
     console.log($character_state);
   }
 
+  function assignUniqueIDs(arr: object[]) {
+    return arr.map((obj, index) => ({
+      ...obj,
+      id: `${Date.now()}-${index}-${Math.random().toString(36).substr(2, 9)}`,
+    }));
+  }
+
   const getScore = (scoreName: any) => {
     let result;
     switch (scoreName) {
@@ -99,6 +107,20 @@
         break;
     }
     return result;
+  };
+
+  let selectedTrait = {};
+  let selectedBond = {};
+
+  const onTraitSelectChange = (e: Event) => {
+    selectedTrait = stat_traits.filter(
+      (trait) => trait.name === e.target.value
+    )[0];
+  };
+  const onBondSelectChange = (e: Event) => {
+    selectedBond = lancerBonds.filter(
+      (trait) => trait.name === e.target.value
+    )[0];
   };
 </script>
 
@@ -125,497 +147,122 @@
         placeholder="Enter Character Name"
       />
     </label>
-
-    <label>
-      Character Image:
-      <input
-        bind:value={$character_state.image.url}
-        type="text"
-        placeholder="Character Portrait URL"
-      />
-    </label>
-
-    <form action="?/updateProfile" method="POST" enctype="multipart/form-data">
-      <label class="[ relative ]" for="avatar">
-        <section class="[ frame ][ portrait-container mb-4 ]">
-          <img
-            src={$character_state.image.url
-              ? $character_state.image.url
-              : "https://picsum.photos/id/184/4288/2848"}
-            alt={$character_state.name}
-            id="avatar-preview"
-          />
-        </section>
-      </label>
-    </form>
   </form>
 
   <div class="[ stack ]">
-    <section class="[ stack-sm ]">
-      <div class="[ flex justify-between content-center ]">
-        <label class="[ label ][ w-40 ]">
-          <span class="[ h3 ]">Hit Points</span>
-
-          <div class="[ flex items-center gap-4 ]">
-            <input
-              class="[ input variant-form-material ][ hp-input ]"
-              type="number"
-              bind:value={$character_state.hit_points.current}
-              placeholder={`${$character_state.hit_points.max ?? 10}`}
-              min={0}
-              max={$character_state.hit_points.max}
-            />
-            /
-            <input
-              class="[ input variant-form-material ][ hp-input ]"
-              type="number"
-              bind:value={$character_state.hit_points.max}
-              placeholder={`${$character_state.hit_points.max ?? 10}`}
-              min={0}
-            />
-          </div>
-        </label>
-        <label class="label">
-          <span>Temp</span>
-          <div>
-            <input
-              class="[ input variant-form-material ][ hp-input ]"
-              type="number"
-              bind:value={$character_state.hit_points.temp}
-              placeholder={`${$character_state.hit_points.max ?? 10}`}
-              min={0}
-              max={$character_state.hit_points.max}
-            />
-          </div>
-        </label>
-      </div>
-      <div>
-        <ProgressBar
-          label="Temporary Energy"
-          meter="bg-primary-400-500-token"
-          value={$character_state.hit_points.temp}
-          max={$character_state.hit_points.max}
-        />
-        <ProgressBar
-          label="Energy"
-          track="bg-primary-50-900-token"
-          height="h-4"
-          value={$character_state.hit_points.current}
-          max={$character_state.hit_points.max}
-        />
-      </div>
-    </section>
+    <HealthSection />
     <section class="[ stack-sm ]">
       <div>
         <span class="[ flex justify-between content-center ][ h3 ]">
-          <p>Statistics</p>
+          <p>Traits</p>
         </span>
         <hr />
       </div>
-      <section class="[ cluster ]">
-        <div class="[ w-32 ]">
-          <p class="[ title-small text-center ]">Armor Class</p>
-          <input
-            class="[ input variant-form-material ]"
-            type="number"
-            bind:value={$character_state.armor_class.value}
-          />
-        </div>
-        <div class="[ w-32 ]">
-          <p class="[ title-small text-center ]">Initiative</p>
-          <input
-            class="[ input variant-form-material ]"
-            type="text"
-            value={scoreToModifier(
-              $character_state.ability_scores.dex,
-              0,
-              true
-            )}
-            disabled
-          />
-        </div>
-        <div class="[ w-32 ]">
-          <p class="[ title-small text-center ]">Speed</p>
-          <input
-            class="[ input variant-form-material ]"
-            type="number"
-            value={0}
-          />
-        </div>
-        <div class="[ w-32 ]">
-          <p class="[ title-small text-center ]">Pass. Percep.</p>
-          <input
-            class="[ input variant-form-material ]"
-            type="number"
-            value={scoreToModifier($character_state.ability_scores.wis)}
-            disabled
-          />
-        </div>
-        <div class="[ w-32 ]">
-          <p class="[ title-small text-center ]">Proficiency</p>
-          <input
-            class="[ input variant-form-material ]"
-            type="number"
-            bind:value={$character_state.proficiency_mod}
-          />
-        </div>
-        <div class="[ w-32 ]">
-          <p class="[ title-small text-center ]">Inspiration</p>
-          <input
-            class="[ input variant-form-material ]"
-            type="number"
-            placeholder="-"
-            min="0"
-          />
-        </div>
-      </section>
-    </section>
-    <section class="[ stack-sm ]">
-      <div>
-        <span class="[ flex justify-between content-center ][ h3 ]">
-          <p>Contitions</p>
-        </span>
-        <hr />
+      <div class="[ stack-sm ]">
+        <select
+          class="select"
+          size="8"
+          value="1"
+          on:change={onTraitSelectChange}
+        >
+          {#each assignUniqueIDs(stat_traits) as statTrait}
+            <option id={statTrait.id} value={statTrait.name}
+              >{statTrait.name}</option
+            >
+          {/each}
+        </select>
       </div>
 
-      <div>
-        <ul class="[ stack-sm ]">
-          <label class="flex items-center space-x-2">
-            <input
-              class="checkbox"
-              type="checkbox"
-              bind:checked={$character_state.conditions.Blinded}
-            />
-            <p>Blinded</p>
-          </label>
-          <label class="flex items-center space-x-2">
-            <input
-              class="checkbox"
-              type="checkbox"
-              bind:checked={$character_state.conditions.Deafened}
-            />
-            <p>Deafened</p>
-          </label>
-          <label class="flex items-center space-x-2">
-            <input
-              class="checkbox"
-              type="checkbox"
-              bind:checked={$character_state.conditions.Exhaustion}
-            />
-            <p>Exhaustion</p>
-          </label>
-          <label class="flex items-center space-x-2">
-            <input
-              class="checkbox"
-              type="checkbox"
-              bind:checked={$character_state.conditions.Frightened}
-            />
-            <p>Frightened</p>
-          </label>
-          <label class="flex items-center space-x-2">
-            <input
-              class="checkbox"
-              type="checkbox"
-              bind:checked={$character_state.conditions.Grappled}
-            />
-            <p>Grappled</p>
-          </label>
-          <label class="flex items-center space-x-2">
-            <input
-              class="checkbox"
-              type="checkbox"
-              bind:checked={$character_state.conditions.Incapacitated}
-            />
-            <p>Incapacitated</p>
-          </label>
-          <label class="flex items-center space-x-2">
-            <input
-              class="checkbox"
-              type="checkbox"
-              bind:checked={$character_state.conditions.Invisible}
-            />
-            <p>Invisible</p>
-          </label>
-          <label class="flex items-center space-x-2">
-            <input
-              class="checkbox"
-              type="checkbox"
-              bind:checked={$character_state.conditions.Necrotic}
-            />
-            <p>Necrotic</p>
-          </label>
-          <label class="flex items-center space-x-2">
-            <input
-              class="checkbox"
-              type="checkbox"
-              bind:checked={$character_state.conditions.Paralyzed}
-            />
-            <p>Paralyzed</p>
-          </label>
-          <label class="flex items-center space-x-2">
-            <input
-              class="checkbox"
-              type="checkbox"
-              bind:checked={$character_state.conditions.Petrified}
-            />
-            <p>Petrified</p>
-          </label>
-          <label class="flex items-center space-x-2">
-            <input
-              class="checkbox"
-              type="checkbox"
-              bind:checked={$character_state.conditions.Poisoned}
-            />
-            <p>Poisoned</p>
-          </label>
-          <label class="flex items-center space-x-2">
-            <input
-              class="checkbox"
-              type="checkbox"
-              bind:checked={$character_state.conditions.Prone}
-            />
-            <p>Prone</p>
-          </label>
-          <label class="flex items-center space-x-2">
-            <input
-              class="checkbox"
-              type="checkbox"
-              bind:checked={$character_state.conditions.Restrained}
-            />
-            <p>Restrained</p>
-          </label>
-          <label class="flex items-center space-x-2">
-            <input
-              class="checkbox"
-              type="checkbox"
-              bind:checked={$character_state.conditions.Stunned}
-            />
-            <p>Stunned</p>
-          </label>
-          <label class="flex items-center space-x-2">
-            <input
-              class="checkbox"
-              type="checkbox"
-              bind:checked={$character_state.conditions.Unconscious}
-            />
-            <p>Unconscious</p>
-          </label>
-        </ul>
-      </div>
+      <!-- TRAIT DISPLAY CARD -->
+
+      {#if selectedTrait.name}
+        <div class="card">
+          <header class="card-header h3">{selectedTrait.name}</header>
+          <section class="p-4 stack-sm">
+            <p>{selectedTrait.description}</p>
+            <div>
+              {`${selectedTrait.item.name} (${
+                selectedTrait.item.description
+              }), ${selectedTrait.stat} ${
+                selectedTrait.adjustment > 0
+                  ? `+${selectedTrait.adjustment}`
+                  : selectedTrait.adjustment
+              }`}
+            </div>
+          </section>
+        </div>
+      {/if}
     </section>
+
+    <!-- BONDS -->
 
     <section class="[ stack-sm ]">
       <div>
         <span class="[ flex justify-between content-center ][ h3 ]">
-          <p>Attacks</p>
+          <p>Bonds</p>
         </span>
         <hr />
       </div>
-      <div>
-        <ul class="[ list ]">
-          <li>
-            <span class="[ card variant-soft-surface ][ w-full px-2 py-1 ]"
-              >MELEE (STR)</span
-            >
-            <span
-              class="[ card variant-ghost-surface ][ px-2 py-1 ][ modifier ]"
-            >
-              {scoreToModifier(
-                $character_state.ability_scores.str,
-                $character_state.proficiency_mod,
-                true
-              )}
-            </span>
-            <span class="[ card variant-ghost-surface ][ px-2 py-1 w-32 ]">
-              <i class="[ fa-solid fa-d6 ]" />{scoreToModifier(
-                $character_state.ability_scores.str,
-                0,
-                true
-              )} DMG
-            </span>
-          </li>
-          <li>
-            <span class="[ card variant-soft-surface ][ w-full px-2 py-1 ]"
-              >RANGED (DEX)</span
-            >
-            <span
-              class="[ card variant-ghost-surface ][ px-2 py-1 ][ modifier ]"
-            >
-              {scoreToModifier(
-                $character_state.ability_scores.dex,
-                $character_state.proficiency_mod,
-                true
-              )}
-            </span>
-            <span class="[ card variant-ghost-surface ][ px-2 py-1 w-32 ]">
-              <i class="[ fa-solid fa-d6 ]" />{scoreToModifier(
-                $character_state.ability_scores.dex,
-                0,
-                true
-              )} DMG
-            </span>
-          </li>
-        </ul>
+      <div class="[ stack-sm ]">
+        <select
+          class="select"
+          size="8"
+          value="1"
+          on:change={onBondSelectChange}
+        >
+          {#each assignUniqueIDs(lancerBonds) as bond}
+            <option id={bond.id} value={bond.name}>{bond.name}</option>
+          {/each}
+        </select>
       </div>
+
+      <!-- TRAIT DISPLAY CARD -->
+
+      {#if selectedBond.name}
+        <div class="card box-sm">
+          <header class="card-header h1">{selectedBond.name}</header>
+          <hr />
+          <section class="p-4 stack-sm">
+            <h4 class="h2">Major Ideals</h4>
+            <hr />
+            <ul>
+              {#each selectedBond.majorIdeals as ideal}
+                <li>
+                  <span>{">"}</span>
+                  <span class="flex-auto">{ideal}</span>
+                </li>
+              {/each}
+            </ul>
+            <h4 class="h2">Minor Ideals</h4>
+            <hr />
+            <ul>
+              {#each selectedBond.minorIdeals as ideal}
+                <li>
+                  <span>{">"}</span>
+                  <span class="flex-auto">{ideal}</span>
+                </li>
+              {/each}
+            </ul>
+            <h4 class="h3">Bond Powers</h4>
+            <hr />
+            <ul class="stack">
+              {#each selectedBond.bondPowers as power}
+                <li class="card box-sm variant-outline-primary stack-sm">
+                  <strong>{power.name}</strong>
+                  {#if power.uses}
+                    <p>({power.uses})</p>
+                  {/if}
+                  <p>{power.description}</p>
+                </li>
+              {/each}
+            </ul>
+          </section>
+          <footer class="card-footer">
+            <!-- You can customize the footer content here -->
+          </footer>
+        </div>
+      {/if}
     </section>
-  </div>
-  <div class="[ stack ]">
-    <div class="[ stack-sm ]">
-      <section>
-        <span class="[ flex justify-between content-center ][ h3 ]">
-          <p>Ability Scores</p>
-          <button>
-            <i class="[ fa-solid fa-plus ][ section-plus ]" />
-          </button>
-        </span>
-        <hr />
-      </section>
-      <ul class="[ list ]">
-        <li>
-          <input
-            class="[ input variant-form-material ][ w-16 ]"
-            type="number"
-            bind:value={$character_state.ability_scores.str}
-            min="0"
-          />
-
-          <span class="[ card variant-soft-surface ][ w-full px-2 py-1 ]"
-            >Strength</span
-          >
-          <span class="[ card variant-ghost-surface ][ px-2 py-1 ][ modifier ]">
-            {scoreToModifier($character_state.ability_scores.str, 0, true)}
-          </span>
-        </li>
-        <li>
-          <input
-            class="[ input variant-form-material ][ w-16 ]"
-            type="number"
-            bind:value={$character_state.ability_scores.dex}
-            min="0"
-          />
-          <span class="[ card variant-soft-surface ][ w-full px-2 py-1 ]"
-            >Dexterity</span
-          >
-          <span class="[ card variant-ghost-surface ][ px-2 py-1 ][ modifier ]">
-            {scoreToModifier($character_state.ability_scores.dex, 0, true)}
-          </span>
-        </li>
-        <li>
-          <input
-            class="[ input variant-form-material ][ w-16 ]"
-            type="number"
-            bind:value={$character_state.ability_scores.con}
-            min="0"
-          />
-          <span class="[ card variant-soft-surface ][ w-full px-2 py-1 ]"
-            >Constitution</span
-          >
-          <span class="[ card variant-ghost-surface ][ px-2 py-1 ][ modifier ]">
-            {scoreToModifier($character_state.ability_scores.con, 0, true)}
-          </span>
-        </li>
-        <li>
-          <input
-            class="[ input variant-form-material ][ w-16 ]"
-            type="number"
-            bind:value={$character_state.ability_scores.int}
-            min="0"
-          />
-          <span class="[ card variant-soft-surface ][ w-full px-2 py-1 ]"
-            >Intelligence</span
-          >
-          <span class="[ card variant-ghost-surface ][ px-2 py-1 ][ modifier ]">
-            {scoreToModifier($character_state.ability_scores.int, 0, true)}
-          </span>
-        </li>
-        <li>
-          <input
-            class="[ input variant-form-material ][ w-16 ]"
-            type="number"
-            bind:value={$character_state.ability_scores.wis}
-            min="0"
-          />
-
-          <span class="[ card variant-soft-surface ][ w-full px-2 py-1 ]"
-            >Wisdom</span
-          >
-          <span class="[ card variant-ghost-surface ][ px-2 py-1 ][ modifier ]">
-            {scoreToModifier($character_state.ability_scores.wis, 0, true)}
-          </span>
-        </li>
-        <li>
-          <input
-            class="[ input variant-form-material ][ w-16 ]"
-            type="number"
-            bind:value={$character_state.ability_scores.cha}
-            min="0"
-          />
-          <span class="[ card variant-soft-surface ][ w-full px-2 py-1 ]"
-            >Charisma</span
-          >
-          <span class="[ card variant-ghost-surface ][ px-2 py-1 ][ modifier ]">
-            {scoreToModifier($character_state.ability_scores.cha, 0, true)}
-          </span>
-        </li>
-      </ul>
-    </div>
-
-    <div class="[ stack-sm ]">
-      <section>
-        <span class="[ flex justify-between content-center ][ h3 ]">
-          <p>Skills</p>
-          <button>
-            <i class="[ fa-solid fa-plus ][ section-plus ]" />
-          </button>
-        </span>
-        <hr />
-      </section>
-
-      <ul class="[ list ]">
-        {#each characterSkills as skill}
-          <li>
-            <label class="flex items-center space-x-2">
-              <input
-                class="checkbox"
-                type="checkbox"
-                bind:checked={skill[1][1]}
-              />
-            </label>
-            <span class="[ card variant-soft-surface ][ px-2 py-1 w-full ]"
-              >{skill[0]}</span
-            >
-          </li>
-        {/each}
-      </ul>
-    </div>
-
-    <div class="[ stack-sm ]">
-      <section>
-        <span class="[ flex justify-between content-center ][ h3 ]">
-          <p>Domains</p>
-          <button>
-            <i class="[ fa-solid fa-plus ][ section-plus ]" />
-          </button>
-        </span>
-        <hr />
-      </section>
-      <ul class="[ list ]">
-        {#each Object.keys($character_state.domains) as domain}
-          <li>
-            <label class="flex items-center space-x-2">
-              <input
-                class="checkbox"
-                type="checkbox"
-                bind:checked={$character_state.domains[domain]}
-              />
-            </label>
-            <span class="[ card variant-soft-surface ][ px-2 py-1 w-full ]"
-              >{domain}</span
-            >
-          </li>
-        {/each}
-      </ul>
-    </div>
   </div>
   <br />
   <button type="submit" class="[ btn variant-outline-primary ]"

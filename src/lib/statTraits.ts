@@ -1,17 +1,12 @@
 import type { Item } from "./equipment";
 
+// IDEA - CHOKE checks?
+
 type statTrait = {
   name: string;
   description: string;
   item: Item;
-  stat:
-    | "maxhp"
-    | "tactical"
-    | "forceful"
-    | "creative"
-    | "reflexive"
-    | "wardice"
-    | "";
+  stat: "CON" | "INT" | "STR" | "CHA" | "DEX" | "WIS" | "";
   // constitution | Intelligence | Strength | Charisma | Dexterity | Wisdom
   adjustment: 3 | 2 | 1 | -1 | -2;
 };
@@ -25,7 +20,7 @@ export const stat_traits: statTrait[] = [
       name: "Coffee thermos",
       description: "+1D6 HP, one use",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: -2,
   },
   {
@@ -36,7 +31,7 @@ export const stat_traits: statTrait[] = [
       name: "Fuzzy Dice",
       description: "gives any vehicle +2 MAX HP",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: 1,
   },
   {
@@ -47,7 +42,7 @@ export const stat_traits: statTrait[] = [
       name: "Substance Detector",
       description: "(pings on proximity)",
     },
-    stat: "maxhp",
+    stat: "CON",
     adjustment: 3,
   },
   {
@@ -58,7 +53,7 @@ export const stat_traits: statTrait[] = [
       name: "Hand cannon",
       description: "1d6+1 DAMAGE",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: -1,
   },
   {
@@ -69,7 +64,7 @@ export const stat_traits: statTrait[] = [
       name: "Bolt-action rifle",
       description: "1D6+1 DAMAGE",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: 2,
   },
   {
@@ -80,7 +75,7 @@ export const stat_traits: statTrait[] = [
       name: "Lighter",
       description: "your longtime companion",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: 1,
   },
   {
@@ -91,7 +86,7 @@ export const stat_traits: statTrait[] = [
       name: "Heavy harpoon launcher",
       description: "1D6+2 DAMAGE",
     },
-    stat: "forceful",
+    stat: "STR",
     adjustment: 1,
   },
   {
@@ -102,7 +97,7 @@ export const stat_traits: statTrait[] = [
       name: "Power armor",
       description: "2 ARMOR, cannot be unequipped",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: -2,
   },
   {
@@ -113,7 +108,7 @@ export const stat_traits: statTrait[] = [
       name: "Art supplies",
       description: "one use",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: 2,
   },
   {
@@ -124,7 +119,7 @@ export const stat_traits: statTrait[] = [
       name: "Wristblade",
       description: "3 DAMAGE, does not count as equipped",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: 1,
   },
   {
@@ -135,7 +130,7 @@ export const stat_traits: statTrait[] = [
       name: "Lightning grenade",
       description: "1D6 DAMAGE, one use",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: -1,
   },
   {
@@ -146,7 +141,7 @@ export const stat_traits: statTrait[] = [
       name: "Psionic grenade",
       description: "scrambles emotions, one use",
     },
-    stat: "forceful",
+    stat: "STR",
     adjustment: 1,
   },
   {
@@ -157,18 +152,18 @@ export const stat_traits: statTrait[] = [
       name: "Minigun",
       description: "1D6+2 DAMAGE",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: -2,
   },
   {
     name: "BOMBER",
     description:
-      "If you have a reasonable amount of prep time, you can use your bomb kit and attempt to destroy any structure by rolling +TACTICAL. You may also spend a WAR DIE at any time to create a small, throwable explosive that deals 1D6 DAMAGE.",
+      "If you have a reasonable amount of prep time, you can use your bomb kit and attempt to destroy any structure by rolling +INT. You may also spend a WAR DIE at any time to create a small, throwable explosive that deals 1D6 DAMAGE.",
     item: {
       name: "Bomb kit",
       description: "one use",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: 1,
   },
   {
@@ -179,7 +174,7 @@ export const stat_traits: statTrait[] = [
       name: "Antique short sword",
       description: "1D6+1 DAMAGE",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: -1,
   },
   {
@@ -190,7 +185,7 @@ export const stat_traits: statTrait[] = [
       name: "Kinetic gauntlet",
       description: "1D6 DAMAGE",
     },
-    stat: "forceful",
+    stat: "STR",
     adjustment: 1,
   },
   {
@@ -201,7 +196,7 @@ export const stat_traits: statTrait[] = [
       name: "Needle gun",
       description: "1D6+1 DAMAGE",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: -1,
   },
   {
@@ -212,7 +207,7 @@ export const stat_traits: statTrait[] = [
       name: "Friendship Bracelet",
       description: "matches another",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: 2,
   },
   {
@@ -223,7 +218,7 @@ export const stat_traits: statTrait[] = [
       name: "Toolbelt",
       description: "produce any hardware store tool, one use",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: -1,
   },
   {
@@ -234,7 +229,7 @@ export const stat_traits: statTrait[] = [
       name: "Camouflage fatigues",
       description: "multiple patterns",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: 2,
   },
   {
@@ -245,7 +240,7 @@ export const stat_traits: statTrait[] = [
       name: "Spear",
       description: "1D6+1 DAMAGE",
     },
-    stat: "forceful",
+    stat: "STR",
     adjustment: 1,
   },
   {
@@ -256,18 +251,18 @@ export const stat_traits: statTrait[] = [
       name: "Combat tuxedo",
       description: "1 ARMOR",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: 1,
   },
   {
     name: "CHEF",
     description:
-      "You can cook a good meal in almost any situation without rolling the dice. When you need to cook an exquisite meal, roll +CREATIVE and choose one of the following effects on a partial success, or two on a full success: grants +1 to any attribute for one roll, heals 1D6+CRE HP, pacifies and nourishes those who eat it.",
+      "You can cook a good meal in almost any situation without rolling the dice. When you need to cook an exquisite meal, roll +WIS and choose one of the following effects on a partial success, or two on a full success: grants +1 to any attribute for one roll, heals 1D6+CRE HP, pacifies and nourishes those who eat it.",
     item: {
       name: "Meat cleaver",
       description: "1D6 DAMAGE",
     },
-    stat: "wardice",
+    stat: "WIS",
     adjustment: 1,
   },
   {
@@ -278,7 +273,7 @@ export const stat_traits: statTrait[] = [
       name: "Portable lab",
       description: "three uses",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: 1,
   },
   {
@@ -289,18 +284,18 @@ export const stat_traits: statTrait[] = [
       name: "Diamond jewelery",
       description: "Quietly bribe someone, one use",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: 1,
   },
   {
     name: "CLIMBER",
     description:
-      "You can climb surfaces with hand- and footholds without rolling the dice, and stick to smooth surfaces by rolling +REFLEXIVE. If you do so during a dangerous situation, you must roll +REFLEXIVE again to unstick yourself without falling or getting hurt.",
+      "You can climb surfaces with hand- and footholds without rolling the dice, and stick to smooth surfaces by rolling +DEX. If you do so during a dangerous situation, you must roll +DEX again to unstick yourself without falling or getting hurt.",
     item: {
       name: "Grapple gun",
       description: "50 feet of cable",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: 1,
   },
   {
@@ -311,7 +306,7 @@ export const stat_traits: statTrait[] = [
       name: "Rocket launcher",
       description: "1D6+2 DAMAGE",
     },
-    stat: "forceful",
+    stat: "STR",
     adjustment: 1,
   },
   {
@@ -322,18 +317,18 @@ export const stat_traits: statTrait[] = [
       name: "Leather trenchcoat",
       description: "1 ARMOR",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: -1,
   },
   {
     name: "CONTORTIONIST",
     description:
-      "You can always fit through small openings and perform feats of flexibility without rolling the dice. If you contort yourself in a particularly difficult way, you've pulled something—decrease your REFLEXIVE attribute by 2 until the end of the mission.",
+      "You can always fit through small openings and perform feats of flexibility without rolling the dice. If you contort yourself in a particularly difficult way, you've pulled something—decrease your DEX attribute by 2 until the end of the mission.",
     item: {
       name: "Skin-tight suit",
       description: "1 ARMOR",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: 1,
   },
   {
@@ -355,7 +350,7 @@ export const stat_traits: statTrait[] = [
       name: "Katana",
       description: "1D6+1 DAMAGE",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: 1,
   },
   {
@@ -366,7 +361,7 @@ export const stat_traits: statTrait[] = [
       name: "Cyborg exoskeleton",
       description: "1 ARMOR",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: 1,
   },
   {
@@ -377,7 +372,7 @@ export const stat_traits: statTrait[] = [
       name: "Debate notes",
       description: "Use to cite inarguable statistics, one use",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: 1,
   },
   {
@@ -388,7 +383,7 @@ export const stat_traits: statTrait[] = [
       name: "Wire cutters",
       description: "3 DAMAGE",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: 1,
   },
   {
@@ -399,7 +394,7 @@ export const stat_traits: statTrait[] = [
       name: "Notepad",
       description: "provides details about someone, three uses",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: 1,
   },
   {
@@ -410,7 +405,7 @@ export const stat_traits: statTrait[] = [
       name: "Stupid hat",
       description: "",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: 1,
   },
   {
@@ -421,7 +416,7 @@ export const stat_traits: statTrait[] = [
       name: "Bulletproof vest",
       description: "1 ARMOR",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: 1,
   },
   //   {
@@ -432,7 +427,7 @@ export const stat_traits: statTrait[] = [
   //       name: "Medicinal herb",
   //       description: "cures an ailment, one use",
   //     },
-  //     stat: "tactical",
+  //     stat: "INT",
   //     adjustment: 1,
   //   },
   {
@@ -454,7 +449,7 @@ export const stat_traits: statTrait[] = [
       name: "Quantum duplicator",
       description: "copies any object, one use",
     },
-    stat: "maxhp",
+    stat: "CON",
     adjustment: 1,
   },
   {
@@ -465,7 +460,7 @@ export const stat_traits: statTrait[] = [
       name: "Invisibility cloak",
       description: "room for two people",
     },
-    stat: "forceful",
+    stat: "STR",
     adjustment: -1,
   },
   {
@@ -476,7 +471,7 @@ export const stat_traits: statTrait[] = [
       name: "Textbook",
       description: "answer any field-related question, one use",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: -1,
   },
   {
@@ -487,18 +482,18 @@ export const stat_traits: statTrait[] = [
       name: "Leather jacket",
       description: "1 ARMOR",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: -2,
   },
   {
     name: "FATALITY",
     description:
-      "Once per mission, you may describe the creative and brutal finishing move you perform on an enemy with less than 3 HP (if you do not have a way of measuring an enemy's HP, you may have to gauge their condition based upon GM description). Once you've performed your finisher, the enemy is permanently killed and cannot be revived by any means.",
+      "Once per mission, you may describe the WIS and brutal finishing move you perform on an enemy with less than 3 HP (if you do not have a way of measuring an enemy's HP, you may have to gauge their condition based upon GM description). Once you've performed your finisher, the enemy is permanently killed and cannot be revived by any means.",
     item: {
       name: "Kunai chain",
       description: "1D6 DAMAGE",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: -1,
   },
   {
@@ -509,29 +504,29 @@ export const stat_traits: statTrait[] = [
       name: "Loaded dice",
       description: "difficult to detect",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: -2,
   },
   {
     name: "FIELD",
     description:
-      "Once per mission, you may project a bubble of solid psionic force ten feet in diameter which is centered on you and provides anyone inside 3 ARMOR against outside attacks. If you roll the dice +CREATIVE, you may attempt to fashion the field into a different shape. Failing this roll or getting hurt while projecting the field immediately dissipates it.",
+      "Once per mission, you may project a bubble of solid psionic force ten feet in diameter which is centered on you and provides anyone inside 3 ARMOR against outside attacks. If you roll the dice +WIS, you may attempt to fashion the field into a different shape. Failing this roll or getting hurt while projecting the field immediately dissipates it.",
     item: {
       name: "Paint gun",
       description: "clearly marks a surface or area",
     },
-    stat: "forceful",
+    stat: "STR",
     adjustment: 2,
   },
   {
     name: "FIEND",
     description:
-      "You utilize amphetamines to enhance your focus. When you have a second free, you can pop some pills and take +2 to your next TACTICAL roll.",
+      "You utilize amphetamines to enhance your focus. When you have a second free, you can pop some pills and take +2 to your next INT roll.",
     item: {
       name: "Pill bottle",
       description: "one use",
     },
-    stat: "wardice",
+    stat: "WIS",
     adjustment: 1,
   },
   {
@@ -542,18 +537,18 @@ export const stat_traits: statTrait[] = [
       name: "Flashy outfit",
       description: "1 ARMOR",
     },
-    stat: "forceful",
+    stat: "STR",
     adjustment: 1,
   },
   {
     name: "FLIGHT",
     description:
-      "You have the ability to fly, perhaps using wings, a jetpack, or telekinetic levitation. If you take damage while in the air, you must roll +REFLEXIVE to avoid a dangerous fall or collision with something nearby.",
+      "You have the ability to fly, perhaps using wings, a jetpack, or telekinetic levitation. If you take damage while in the air, you must roll +DEX to avoid a dangerous fall or collision with something nearby.",
     item: {
       name: "AR goggles",
       description: "lets you see enemies' HP",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: 1,
   },
   {
@@ -564,7 +559,7 @@ export const stat_traits: statTrait[] = [
       name: "Energy drink",
       description: "+1D6 HP, one use",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: 2,
   },
   {
@@ -575,7 +570,7 @@ export const stat_traits: statTrait[] = [
       name: "Stress ball",
       description: "squeeze for +1 to any WAR DIE roll",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: -1,
   },
   {
@@ -586,7 +581,7 @@ export const stat_traits: statTrait[] = [
       name: "Machete",
       description: "1D6 DAMAGE",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: 1,
   },
   {
@@ -597,7 +592,7 @@ export const stat_traits: statTrait[] = [
       name: "Stasis grenade",
       description: "ten minute duration, one use",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: -1,
   },
   {
@@ -608,7 +603,7 @@ export const stat_traits: statTrait[] = [
       name: "Electronics kit",
       description: "three uses",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: -2,
   },
   {
@@ -619,7 +614,7 @@ export const stat_traits: statTrait[] = [
       name: "Silencer",
       description: "attach to any gun",
     },
-    stat: "forceful",
+    stat: "STR",
     adjustment: 1,
   },
   {
@@ -630,18 +625,18 @@ export const stat_traits: statTrait[] = [
       name: "Glasses",
       description: "you can't see without them",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: 2,
   },
   {
     name: "GOONS",
     description:
-      "You begin each mission accompanied by 1D6 disposable goons. Each goon comes with 3 MAX HP and all standard issue items. You can roll +TACTICAL to command your goons. They tend to misinterpret commands, shoot themselves in the foot (figuratively or literally), and often make bizarre non-sequitur decisions under pressure.",
+      "You begin each mission accompanied by 1D6 disposable goons. Each goon comes with 3 MAX HP and all standard issue items. You can roll +INT to command your goons. They tend to misinterpret commands, shoot themselves in the foot (figuratively or literally), and often make bizarre non-sequitur decisions under pressure.",
     item: {
       name: "Walkie-talkie",
       description: "summons goons to your position",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: 1,
   },
   {
@@ -652,29 +647,29 @@ export const stat_traits: statTrait[] = [
       name: "Pump-action shotgun",
       description: "1D6+1 DAMAGE",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: -1,
   },
   {
     name: "GROW",
     description:
-      "You may double your size at will, as long as your spatial manipulator belt is intact. Each time you do, increase your MAX HP by 1D6, increase your FORCEFUL score by 1, and decrease your REFLEXIVE score by 1. While enlarged, you may also add your current HP to any unarmed or melee DAMAGE you deal.",
+      "You may double your size at will, as long as your spatial manipulator belt is intact. Each time you do, increase your MAX HP by 1D6, increase your STR score by 1, and decrease your DEX score by 1. While enlarged, you may also add your current HP to any unarmed or melee DAMAGE you deal.",
     item: {
       name: "Spatial manipulator belt",
       description: "accessory",
     },
-    stat: "maxhp",
+    stat: "CON",
     adjustment: -2,
   },
   {
     name: "HACKER",
     description:
-      "If you have a reasonable amount of prep time and direct access, you can attempt to gain control of any computer or electronic machine by rolling the dice +TACTICAL. If you do not have direct access, you can attempt to hack in from a safe place using your briefcase computer.",
+      "If you have a reasonable amount of prep time and direct access, you can attempt to gain control of any computer or electronic machine by rolling the dice +INT. If you do not have direct access, you can attempt to hack in from a safe place using your briefcase computer.",
     item: {
       name: "Briefcase computer",
       description: "remotely access electronics",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: 1,
   },
   {
@@ -685,7 +680,7 @@ export const stat_traits: statTrait[] = [
       name: "Bundle of lollipops",
       description: "heal 1 HP, three uses",
     },
-    stat: "forceful",
+    stat: "STR",
     adjustment: -1,
   },
   {
@@ -696,18 +691,18 @@ export const stat_traits: statTrait[] = [
       name: "Bloody axe",
       description: "1D6 DAMAGE",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: 1,
   },
   {
     name: "HATE",
     description:
-      "Something about you just rubs people the wrong way, and you don't mind that at all. When you meet someone, roll +CREATIVE—on anything but a success, they hate or strongly dislike you. When you attack someone because you truly hate them—not just for money, or because they were a threat, but because you hate them, and you can explain why—they will be absolutely obliterated, HP notwithstanding.",
+      "Something about you just rubs people the wrong way, and you don't mind that at all. When you meet someone, roll +WIS—on anything but a success, they hate or strongly dislike you. When you attack someone because you truly hate them—not just for money, or because they were a threat, but because you hate them, and you can explain why—they will be absolutely obliterated, HP notwithstanding.",
     item: {
       name: "Bubblegum",
       description: "funny comic included",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: -1,
   },
   {
@@ -718,7 +713,7 @@ export const stat_traits: statTrait[] = [
       name: "Gas mask",
       description: "ignore breathing-based damage",
     },
-    stat: "forceful",
+    stat: "STR",
     adjustment: 1,
   },
   {
@@ -729,7 +724,7 @@ export const stat_traits: statTrait[] = [
       name: "Psycho-recorder",
       description: "makes a mind backup tape, one use",
     },
-    stat: "forceful",
+    stat: "STR",
     adjustment: -2,
   },
   {
@@ -740,7 +735,7 @@ export const stat_traits: statTrait[] = [
       name: "Break-action shotgun",
       description: "1D6+1 DAMAGE",
     },
-    stat: "forceful",
+    stat: "STR",
     adjustment: 1,
   },
   {
@@ -762,7 +757,7 @@ export const stat_traits: statTrait[] = [
       name: "Ritual dagger",
       description: "1D6 DAMAGE, double vs. divine beings",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: 1,
   },
   {
@@ -773,7 +768,7 @@ export const stat_traits: statTrait[] = [
       name: "Ancient longsword",
       description: "1D6+1 DAMAGE",
     },
-    stat: "forceful",
+    stat: "STR",
     adjustment: 1,
   },
   {
@@ -784,7 +779,7 @@ export const stat_traits: statTrait[] = [
       name: "Hotwiring kit",
       description: "hotwire any inert vehicle, one use",
     },
-    stat: "forceful",
+    stat: "STR",
     adjustment: 1,
   },
   {
@@ -801,18 +796,18 @@ export const stat_traits: statTrait[] = [
   {
     name: "HUNTER",
     description:
-      "You can track anything that leaves a trail, as though the ability were instinctual. When you find it, you can roll +TACTICAL to observe it without detection.",
+      "You can track anything that leaves a trail, as though the ability were instinctual. When you find it, you can roll +INT to observe it without detection.",
     item: {
       name: "Compound bow",
       description: "1D6 damage, silent",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: 1,
   },
   {
     name: "HYBRID",
     description:
-      "You are genetically spliced with an animal of your choice. You gain +1 to an attribute that you and the GM agree makes sense for your animal (+1 FORCEFUL for a shark, +1 REFLEXIVE for a hummingbird, etc.). Animals of the same type will always see you as one of their own, and tend towards trusting anyone you're with. Unfortunately, all armor is 1 point less effective due to its incorrect fit.",
+      "You are genetically spliced with an animal of your choice. You gain +1 to an attribute that you and the GM agree makes sense for your animal (+1 STR for a shark, +1 DEX for a hummingbird, etc.). Animals of the same type will always see you as one of their own, and tend towards trusting anyone you're with. Unfortunately, all armor is 1 point less effective due to its incorrect fit.",
     item: {
       name: "Animal feed",
       description: "+1D6 HP, one use",
@@ -828,7 +823,7 @@ export const stat_traits: statTrait[] = [
       name: "Nutrient slurry",
       description: "+2D6 HP, one use",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: -2,
   },
   {
@@ -836,21 +831,21 @@ export const stat_traits: statTrait[] = [
     description:
       "You know how to get the party started. When you land the first strike in a fight, gain a WAR DIE and deal double DAMAGE. Take double DAMAGE whenever you are struck by an unexpected attack.",
     item: {
-      name: "Tactical battleaxe",
+      name: "INT battleaxe",
       description: "1D6+1 DAMAGE",
     },
-    stat: "forceful",
+    stat: "STR",
     adjustment: 2,
   },
   {
     name: "ILLUSION",
     description:
-      "If you have a free hand, you can attempt to manipulate another person into hallucinating anything of your choice by rolling +CREATIVE. Rolling higher creates a more believable illusion, and illusions borne of lower rolls may be influenced by the contents of the victim's psyche.",
+      "If you have a free hand, you can attempt to manipulate another person into hallucinating anything of your choice by rolling +WIS. Rolling higher creates a more believable illusion, and illusions borne of lower rolls may be influenced by the contents of the victim's psyche.",
     item: {
       name: "Whip",
       description: "1D6 DAMAGE",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: 1,
   },
   {
@@ -861,7 +856,7 @@ export const stat_traits: statTrait[] = [
       name: "Slingshot",
       description: "3 DAMAGE",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: 1,
   },
   {
@@ -872,7 +867,7 @@ export const stat_traits: statTrait[] = [
       name: "Automatic injection suit",
       description: "2 ARMOR",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: -1,
   },
   {
@@ -894,7 +889,7 @@ export const stat_traits: statTrait[] = [
       name: "Combat knife",
       description: "1D6 DAMAGE",
     },
-    stat: "forceful",
+    stat: "STR",
     adjustment: 1,
   },
   {
@@ -905,7 +900,7 @@ export const stat_traits: statTrait[] = [
       name: "Mop",
       description: "3 DAMAGE",
     },
-    stat: "forceful",
+    stat: "STR",
     adjustment: 1,
   },
   {
@@ -916,7 +911,7 @@ export const stat_traits: statTrait[] = [
       name: "Mirror",
       description: "break to reroll any roll and take the lower result",
     },
-    stat: "maxhp",
+    stat: "CON",
     adjustment: 1,
   },
   {
@@ -927,7 +922,7 @@ export const stat_traits: statTrait[] = [
       name: "Joke pistol",
       description: "shoots “BANG!” flag",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: -2,
   },
   {
@@ -938,7 +933,7 @@ export const stat_traits: statTrait[] = [
       name: "Medieval helmet",
       description: "1 ARMOR, accessory",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: -1,
   },
   {
@@ -949,7 +944,7 @@ export const stat_traits: statTrait[] = [
       name: "Many knives",
       description: "1D6+1 DAMAGE",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: 1,
   },
   {
@@ -960,7 +955,7 @@ export const stat_traits: statTrait[] = [
       name: "Mercury-core executioner's sword",
       description: "1D6+FRC DAMAGE",
     },
-    stat: "maxhp",
+    stat: "CON",
     adjustment: 2,
   },
   {
@@ -971,7 +966,7 @@ export const stat_traits: statTrait[] = [
       name: "Thick gloves",
       description: "must be removed to establish link",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: 1,
   },
   {
@@ -982,7 +977,7 @@ export const stat_traits: statTrait[] = [
       name: "Blindfold",
       description: "helps you focus",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: 2,
   },
   {
@@ -999,12 +994,12 @@ export const stat_traits: statTrait[] = [
   {
     name: "LUSH",
     description:
-      "You prefer to fight at least half in the bag. When you have some free time, you can tip back your liquor bottle and take +2 to your next FORCEFUL roll.",
+      "You prefer to fight at least half in the bag. When you have some free time, you can tip back your liquor bottle and take +2 to your next STR roll.",
     item: {
       name: "Liquor bottle",
       description: "one use",
     },
-    stat: "wardice",
+    stat: "WIS",
     adjustment: 1,
   },
   {
@@ -1021,23 +1016,23 @@ export const stat_traits: statTrait[] = [
   {
     name: "MECHANIC",
     description:
-      "With a reasonable amount of prep time, you can use your toolbox to repair any machine for 1D6+TACTICAL HP.",
+      "With a reasonable amount of prep time, you can use your toolbox to repair any machine for 1D6+INT HP.",
     item: {
       name: "Toolbox",
       description: "repair 1D6+TAC HP, three uses",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: 1,
   },
   {
     name: "MEDIC",
     description:
-      "With a reasonable amount of prep time, you can use your medkit to heal any living thing for 1D6+TACTICAL HP.",
+      "With a reasonable amount of prep time, you can use your medkit to heal any living thing for 1D6+INT HP.",
     item: {
       name: "First aid kit",
       description: "heal 1D6+TAC HP, three uses",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: 1,
   },
   {
@@ -1048,7 +1043,7 @@ export const stat_traits: statTrait[] = [
       name: "Halo",
       description: "make someone change their ways, one use",
     },
-    stat: "forceful",
+    stat: "STR",
     adjustment: -1,
   },
   {
@@ -1059,18 +1054,18 @@ export const stat_traits: statTrait[] = [
       name: "Varnish",
       description: "+1D6 HP while mimic, one use",
     },
-    stat: "maxhp",
+    stat: "CON",
     adjustment: 2,
   },
   {
     name: "MINDREADER",
     description:
-      "You can read anyone's thoughts and general state of mind without rolling. You may roll +CREATIVE to scan for specific information, such as names, passwords, memories, and images. Unfortunately, you are particularly susceptible to interference, and the thoughts of others often cloud your psyche. Your mindreading ability is neutralized in the presence of another mindreader, and vice versa.",
+      "You can read anyone's thoughts and general state of mind without rolling. You may roll +WIS to scan for specific information, such as names, passwords, memories, and images. Unfortunately, you are particularly susceptible to interference, and the thoughts of others often cloud your psyche. Your mindreading ability is neutralized in the presence of another mindreader, and vice versa.",
     item: {
       name: "X-ray specs",
       description: "see through walls",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: -1,
   },
   {
@@ -1081,29 +1076,29 @@ export const stat_traits: statTrait[] = [
       name: "Mobility aid",
       description: "comes with an add-on",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: 1,
   },
   {
     name: "MOMENTUM",
     description:
-      "You are able to enter a state of cumulative momentum at will, harnessing inertia to your advantage. Each time you succeed on a REFLEXIVE roll, gain +1 REFLEXIVE. This bonus accumulates until you stop moving, at which point your REFLEXIVE attribute reverts back to normal. Rolling a failure with a cumulative bonus from this trait will incur DAMAGE equal to the bonus, and cause you to stop moving.",
+      "You are able to enter a state of cumulative momentum at will, harnessing inertia to your advantage. Each time you succeed on a DEX roll, gain +1 DEX. This bonus accumulates until you stop moving, at which point your DEX attribute reverts back to normal. Rolling a failure with a cumulative bonus from this trait will incur DAMAGE equal to the bonus, and cause you to stop moving.",
     item: {
       name: "Rail-grinding boots",
       description: "grind on any edge",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: 1,
   },
   {
     name: "MONOLOGUE",
     description:
-      "When you give an impassioned ethical, political, or philosophical speech, roll +CREATIVE. On a partial success, you engage your target in the melodramatic speech temporarily, distracting them. On a full success, they see your line of reasoning and make an effort to join your school of thought.",
+      "When you give an impassioned ethical, political, or philosophical speech, roll +WIS. On a partial success, you engage your target in the melodramatic speech temporarily, distracting them. On a full success, they see your line of reasoning and make an effort to join your school of thought.",
     item: {
       name: "Yorick's skull prop",
       description: "very realistic",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: 2,
   },
   {
@@ -1114,7 +1109,7 @@ export const stat_traits: statTrait[] = [
       name: "Monster index",
       description: "hold aloft with both hands to summon",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: -1,
   },
   {
@@ -1125,7 +1120,7 @@ export const stat_traits: statTrait[] = [
       name: "Gifted scythe",
       description: "2D6 DAMAGE",
     },
-    stat: "maxhp",
+    stat: "CON",
     adjustment: -2,
   },
   {
@@ -1136,7 +1131,7 @@ export const stat_traits: statTrait[] = [
       name: "Birdseed",
       description: "guarantee a helpful omen, one use",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: 1,
   },
   {
@@ -1147,7 +1142,7 @@ export const stat_traits: statTrait[] = [
       name: "Toxic grenade",
       description: "1D6+2 damage, one use",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: -1,
   },
   {
@@ -1158,7 +1153,7 @@ export const stat_traits: statTrait[] = [
       name: "Brain jar",
       description: "keeps one brain alive",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: 1,
   },
   {
@@ -1169,7 +1164,7 @@ export const stat_traits: statTrait[] = [
       name: "Ninja weapon",
       description: "six uses",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: 1,
   },
   {
@@ -1180,7 +1175,7 @@ export const stat_traits: statTrait[] = [
       name: "Trenchcoat",
       description: "1 ARMOR",
     },
-    stat: "forceful",
+    stat: "STR",
     adjustment: 1,
   },
   {
@@ -1191,29 +1186,29 @@ export const stat_traits: statTrait[] = [
       name: "Sudoku workbook",
       description: "keep someone occupied, one use",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: 1,
   },
   {
     name: "OBJECTS",
     description:
-      "You may attack with any non-weapon object within reach—if you describe a unique, creative way of causing harm with this object, it functions as a weapon which deals 1D6 DAMAGE. Subsequent objects you attack with add a cumulative +1 DAMAGE bonus per new object; this cumulative bonus resets to 0 when you roll a failure, reuse an attack description, or switch to a conventional weapon.",
+      "You may attack with any non-weapon object within reach—if you describe a unique, WIS way of causing harm with this object, it functions as a weapon which deals 1D6 DAMAGE. Subsequent objects you attack with add a cumulative +1 DAMAGE bonus per new object; this cumulative bonus resets to 0 when you roll a failure, reuse an attack description, or switch to a conventional weapon.",
     item: {
       name: "Leather belt",
       description: "3 DAMAGE",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: 1,
   },
   {
     name: "OOZE",
     description:
-      "You can transform into a gelatinous substance at will. While in your gelatinous form, you have -2 REFLEXIVE and -2 FORCEFUL, but you can squeeze through grates, fit inside containers, and split into pieces.",
+      "You can transform into a gelatinous substance at will. While in your gelatinous form, you have -2 DEX and -2 STR, but you can squeeze through grates, fit inside containers, and split into pieces.",
     item: {
       name: "Bucket",
       description: "5 gallon",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: 1,
   },
   {
@@ -1224,7 +1219,7 @@ export const stat_traits: statTrait[] = [
       name: "Wrist and ankle weights",
       description: "1 ARMOR, accessory",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: -2,
   },
   {
@@ -1235,7 +1230,7 @@ export const stat_traits: statTrait[] = [
       name: "Baseball bat",
       description: "1D6 DAMAGE",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: 1,
   },
   {
@@ -1246,7 +1241,7 @@ export const stat_traits: statTrait[] = [
       name: "Box of tissues",
       description: "hides a pistol inside, 1D6 DAMAGE",
     },
-    stat: "forceful",
+    stat: "STR",
     adjustment: -1,
   },
   {
@@ -1257,7 +1252,7 @@ export const stat_traits: statTrait[] = [
       name: "Pet treats",
       description: "three uses",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: -1,
   },
   {
@@ -1268,7 +1263,7 @@ export const stat_traits: statTrait[] = [
       name: "Rolodex",
       description: "3 strange and important people are listed",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: 1,
   },
   {
@@ -1279,18 +1274,18 @@ export const stat_traits: statTrait[] = [
       name: "Refrigerator",
       description: "well-stocked",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: -1,
   },
   {
     name: "POLYGLOT",
     description:
-      "You can understand and communicate in any mundane language, written or verbal. You can also roll +TACTICAL to understand languages which are supernatural in origin.",
+      "You can understand and communicate in any mundane language, written or verbal. You can also roll +INT to understand languages which are supernatural in origin.",
     item: {
       name: "Universal phrasebook",
       description: "can teach anyone one phrase",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: 1,
   },
   {
@@ -1301,7 +1296,7 @@ export const stat_traits: statTrait[] = [
       name: "Stopwatch",
       description: "waterproof",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: -2,
   },
   {
@@ -1312,7 +1307,7 @@ export const stat_traits: statTrait[] = [
       name: "Hatchet",
       description: "3 DAMAGE",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: 1,
   },
   {
@@ -1323,7 +1318,7 @@ export const stat_traits: statTrait[] = [
       name: "Flowing garment",
       description: "1 ARMOR",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: 1,
   },
   {
@@ -1334,7 +1329,7 @@ export const stat_traits: statTrait[] = [
       name: "Light machine gun",
       description: "1D6+1 DAMAGE",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: -1,
   },
   {
@@ -1345,7 +1340,7 @@ export const stat_traits: statTrait[] = [
       name: "Scrapbook",
       description: "contains one mission-relevant photo",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: 1,
   },
   {
@@ -1356,18 +1351,18 @@ export const stat_traits: statTrait[] = [
       name: "Gold stopwatch",
       description: "always works",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: 1,
   },
   {
     name: "PUPPETMASTER",
     description:
-      "You can implant a command in someone's brain by rolling the dice +FORCEFUL. If you succeed, they are forced to comply.",
+      "You can implant a command in someone's brain by rolling the dice +STR. If you succeed, they are forced to comply.",
     item: {
       name: "Strappy leather harness",
       description: "1 ARMOR",
     },
-    stat: "forceful",
+    stat: "STR",
     adjustment: 1,
   },
   {
@@ -1378,7 +1373,7 @@ export const stat_traits: statTrait[] = [
       name: "Flamethrower",
       description: "1D6+2 DAMAGE",
     },
-    stat: "forceful",
+    stat: "STR",
     adjustment: 2,
   },
   {
@@ -1389,7 +1384,7 @@ export const stat_traits: statTrait[] = [
       name: "Quantum stabilizer suit",
       description: "2 ARMOR",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: 1,
   },
   {
@@ -1400,18 +1395,18 @@ export const stat_traits: statTrait[] = [
       name: "Ripped jacket",
       description: "1 ARMOR",
     },
-    stat: "maxhp",
+    stat: "CON",
     adjustment: 2,
   },
   {
     name: "RADIOACTIVE",
     description:
-      "When you aren't wearing your treated bandages, radiation bursts forth from your body and deals 2D6 DAMAGE to anyone near you. When this occurs, you may attempt to direct the attack at a single target by rolling +FORCEFUL. After the damage is dealt, the radiation temporarily dissipates, but you will quickly waste away and die if your treated bandages are not reapplied.",
+      "When you aren't wearing your treated bandages, radiation bursts forth from your body and deals 2D6 DAMAGE to anyone near you. When this occurs, you may attempt to direct the attack at a single target by rolling +STR. After the damage is dealt, the radiation temporarily dissipates, but you will quickly waste away and die if your treated bandages are not reapplied.",
     item: {
       name: "Treated bandages",
       description: "accessory",
     },
-    stat: "forceful",
+    stat: "STR",
     adjustment: -2,
   },
   {
@@ -1422,7 +1417,7 @@ export const stat_traits: statTrait[] = [
       name: "Ultra-shotgun",
       description: "2D6 DAMAGE",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: -1,
   },
   {
@@ -1433,7 +1428,7 @@ export const stat_traits: statTrait[] = [
       name: "Tranq pistol",
       description: "0 DAMAGE, 3-in-1D6 chance to knock out",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: 1,
   },
   {
@@ -1444,18 +1439,18 @@ export const stat_traits: statTrait[] = [
       name: "Grenade",
       description: "1D6 DAMAGE, one use",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: 1,
   },
   {
     name: "RETREAT",
     description:
-      "You have a place in your head (a cozy cabin, a crystal palace, a concrete cell, etc.) that you can manifest physically. Once per mission, you may roll +CREATIVE to transport yourself and up to four other people there. The specifics of the retreat may be changed at will, resting there heals 1D6 HP, and you or your guests may leave at any time.",
+      "You have a place in your head (a cozy cabin, a crystal palace, a concrete cell, etc.) that you can manifest physically. Once per mission, you may roll +WIS to transport yourself and up to four other people there. The specifics of the retreat may be changed at will, resting there heals 1D6 HP, and you or your guests may leave at any time.",
     item: {
       name: "Polaroid camera",
       description: "for memories",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: 1,
   },
   {
@@ -1477,7 +1472,7 @@ export const stat_traits: statTrait[] = [
       name: "Laser rifle",
       description: "1D6+1 DAMAGE",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: -1,
   },
   {
@@ -1488,18 +1483,18 @@ export const stat_traits: statTrait[] = [
       name: "Experimental sneakers",
       description: "indestructible",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: 1,
   },
   {
     name: "SAWBONES",
     description:
-      "You're a doctor, but you don't have a medical license. Once per mission, when a player character dies, you can roll +CREATIVE to perform surgery and resurrect them with full health. You must swap out one of their traits for a new one as part of your experimental surgery, and explain why your operation changed their trait.",
+      "You're a doctor, but you don't have a medical license. Once per mission, when a player character dies, you can roll +WIS to perform surgery and resurrect them with full health. You must swap out one of their traits for a new one as part of your experimental surgery, and explain why your operation changed their trait.",
     item: {
       name: "Bone saw",
       description: "1D6+1 DAMAGE",
     },
-    stat: "maxhp",
+    stat: "CON",
     adjustment: -2,
   },
   {
@@ -1510,7 +1505,7 @@ export const stat_traits: statTrait[] = [
       name: "Semi-automatic rifle",
       description: "1D6+1 DAMAGE",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: 1,
   },
   {
@@ -1521,7 +1516,7 @@ export const stat_traits: statTrait[] = [
       name: "Ghillie suit",
       description: "disguise self as plant",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: 1,
   },
   {
@@ -1532,40 +1527,40 @@ export const stat_traits: statTrait[] = [
       name: "Wards and charms",
       description: "accessory",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: 1,
   },
   {
     name: "Security",
     description:
-      "If you have a reasonable amount of prep time and the coast is clear, you can use your anti-security kit and attempt to breach any lock or crack any safe by rolling +REFLEXIVE. You may also disarm traps you know about and can physically reach by rolling +TACTICAL.",
+      "If you have a reasonable amount of prep time and the coast is clear, you can use your anti-security kit and attempt to breach any lock or crack any safe by rolling +DEX. You may also disarm traps you know about and can physically reach by rolling +INT.",
     item: {
       name: "Anti-security kit",
       description: "three uses",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: 1,
   },
   {
     name: "Seduce",
     description:
-      "When someone wants to get with you, you can fade to black and get with them too. After you return from a nearby private retreat, roll +CREATIVE and choose one result on a partial success, or two on a full success: they want to help you, they trust you with their secrets, or they want to get with you again. On a failure, you're old news, and they'll dislike your company from now on.",
+      "When someone wants to get with you, you can fade to black and get with them too. After you return from a nearby private retreat, roll +WIS and choose one result on a partial success, or two on a full success: they want to help you, they trust you with their secrets, or they want to get with you again. On a failure, you're old news, and they'll dislike your company from now on.",
     item: {
       name: "Little black dress",
       description: "0 ARMOR, stand out anywhere",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: 1,
   },
   {
     name: "Seer",
     description:
-      "When you have a moment of peace and quiet, you may read your divination tool (perhaps a deck of playing cards or a set of polyhedral dice) and roll +CREATIVE. If you succeed, the GM will answer one question about the current mission honestly. If it's a partial success, they'll answer vaguely. A failure brings a grim and terrible omen.",
+      "When you have a moment of peace and quiet, you may read your divination tool (perhaps a deck of playing cards or a set of polyhedral dice) and roll +WIS. If you succeed, the GM will answer one question about the current mission honestly. If it's a partial success, they'll answer vaguely. A failure brings a grim and terrible omen.",
     item: {
       name: "Divination tool",
       description: "",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: 1,
   },
   {
@@ -1576,7 +1571,7 @@ export const stat_traits: statTrait[] = [
       name: "Fetching outfit",
       description: "0 ARMOR",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: -1,
   },
   {
@@ -1587,18 +1582,18 @@ export const stat_traits: statTrait[] = [
       name: "Revolver",
       description: "1D6+1 DAMAGE",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: 1,
   },
   {
     name: "Shield",
     description:
-      "You can use any shield as a weapon which bashes enemies for 1D6 DAMAGE plus the shield's ARMOR bonus. If you throw the shield as a ranged weapon, you can roll +REFLEXIVE to ricochet it back to you.",
+      "You can use any shield as a weapon which bashes enemies for 1D6 DAMAGE plus the shield's ARMOR bonus. If you throw the shield as a ranged weapon, you can roll +DEX to ricochet it back to you.",
     item: {
       name: "Combat shield",
       description: "0 ARMOR, accessory",
     },
-    stat: "forceful",
+    stat: "STR",
     adjustment: 1,
   },
   {
@@ -1609,18 +1604,18 @@ export const stat_traits: statTrait[] = [
       name: "Performing accoutrement",
       description: "e.g. instrument, baton, mic",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: 1,
   },
   {
     name: "Shrink",
     description:
-      "Your unique atomic structure allows you to compress yourself down to a millimeter tall without rolling the dice. If you go smaller, you must roll +TACTICAL to avoid slipping through a hole in the quantum foam. Those who slip through the foam suffer mind-bending consequences, like becoming marooned or losing their sense of time (GM's call).",
+      "Your unique atomic structure allows you to compress yourself down to a millimeter tall without rolling the dice. If you go smaller, you must roll +INT to avoid slipping through a hole in the quantum foam. Those who slip through the foam suffer mind-bending consequences, like becoming marooned or losing their sense of time (GM's call).",
     item: {
       name: "Stainless steel syringe",
       description: "contains a miniature submarine",
     },
-    stat: "maxhp",
+    stat: "CON",
     adjustment: 2,
   },
   {
@@ -1631,7 +1626,7 @@ export const stat_traits: statTrait[] = [
       name: "Ownerless femur",
       description: "1D6 DAMAGE",
     },
-    stat: "forceful",
+    stat: "STR",
     adjustment: -2,
   },
   {
@@ -1642,7 +1637,7 @@ export const stat_traits: statTrait[] = [
       name: "Shabby clothes",
       description: "0 ARMOR, always unthreatening",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: -1,
   },
   {
@@ -1653,18 +1648,18 @@ export const stat_traits: statTrait[] = [
       name: "Taperecorder",
       description: "plays activation phrase",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: -1,
   },
   {
     name: "Slow-Mo",
     description:
-      "You may slow time to a crawl (at a 1-to-1 seconds-to-minutes ratio) at will, turning volleys of gunfire into glittering armadas of hot lead ships. Doing so costs you 1 HP for every second of time you slow. Slow-time affects your actions and physical processes but does not change the speed of your thoughts, giving you lightning-fast cognition relative to those around you. During slowed time, your REFLEXIVE score is increased by 4.",
+      "You may slow time to a crawl (at a 1-to-1 seconds-to-minutes ratio) at will, turning volleys of gunfire into glittering armadas of hot lead ships. Doing so costs you 1 HP for every second of time you slow. Slow-time affects your actions and physical processes but does not change the speed of your thoughts, giving you lightning-fast cognition relative to those around you. During slowed time, your DEX score is increased by 4.",
     item: {
       name: "Machine pistol",
       description: "1D6 DAMAGE",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: -2,
   },
   {
@@ -1675,7 +1670,7 @@ export const stat_traits: statTrait[] = [
       name: "Sledgehammer",
       description: "1D6+1 DAMAGE",
     },
-    stat: "forceful",
+    stat: "STR",
     adjustment: 1,
   },
   {
@@ -1686,18 +1681,18 @@ export const stat_traits: statTrait[] = [
       name: "Portable workbench",
       description: "one use",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: 1,
   },
   {
     name: "Smoker",
     description:
-      "You are addicted to nicotine. When you have some downtime, you can calm your nerves with a cigarette and take +2 to your next REFLEXIVE roll.",
+      "You are addicted to nicotine. When you have some downtime, you can calm your nerves with a cigarette and take +2 to your next DEX roll.",
     item: {
       name: "Cigarette case",
       description: "one use, +1 WAR DIE per mission",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: 2,
   },
   {
@@ -1708,7 +1703,7 @@ export const stat_traits: statTrait[] = [
       name: "Poison fingertips",
       description: "2D6 damage, don't count as equipped",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: -2,
   },
   {
@@ -1719,7 +1714,7 @@ export const stat_traits: statTrait[] = [
       name: "Sneaking suit",
       description: "1 ARMOR",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: 1,
   },
   {
@@ -1741,7 +1736,7 @@ export const stat_traits: statTrait[] = [
       name: "Kinetic shock shield",
       description: "2 ARMOR, equip as weapon",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: -2,
   },
   {
@@ -1752,7 +1747,7 @@ export const stat_traits: statTrait[] = [
       name: "Cyanide pill",
       description: "one use",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: 1,
   },
   {
@@ -1763,7 +1758,7 @@ export const stat_traits: statTrait[] = [
       name: "Laser watch",
       description: "3 DAMAGE, can cut any restraints",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: 1,
   },
   {
@@ -1774,7 +1769,7 @@ export const stat_traits: statTrait[] = [
       name: "Stand",
       description: "immortal and invisible",
     },
-    stat: "forceful",
+    stat: "STR",
     adjustment: 1,
   },
   {
@@ -1785,18 +1780,18 @@ export const stat_traits: statTrait[] = [
       name: "Chaff grenade",
       description: "disables electronics, one use",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: 1,
   },
   {
     name: "STATUESQUE",
     description:
-      "You're made of something hard (stone, metal, gems, etc.) Once per mission, you can reflect any projectile back at the attacker. If you are also wearing armor, decrease your REFLEXIVE score by 2.",
+      "You're made of something hard (stone, metal, gems, etc.) Once per mission, you can reflect any projectile back at the attacker. If you are also wearing armor, decrease your DEX score by 2.",
     item: {
       name: "Tough exterior",
       description: "2 ARMOR, doesn't count as equipped",
     },
-    stat: "forceful",
+    stat: "STR",
     adjustment: 1,
   },
   {
@@ -1807,7 +1802,7 @@ export const stat_traits: statTrait[] = [
       name: "Flask of dissolving fluid",
       description: "8 ounces",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: -1,
   },
   {
@@ -1818,18 +1813,18 @@ export const stat_traits: statTrait[] = [
       name: "Personal stash",
       description: "one use",
     },
-    stat: "wardice",
+    stat: "WIS",
     adjustment: 1,
   },
   {
     name: "STRETCH",
     description:
-      "You can stretch any of your limbs to a length of ten feet × your MAX HP by rolling the dice +REFLEXIVE. Stretched out limbs can be pushed even further, but will incur 1 DAMAGE for every additional ten feet of stretch. You take +1 DAMAGE when enemies specifically target stretched-out limbs.",
+      "You can stretch any of your limbs to a length of ten feet × your MAX HP by rolling the dice +DEX. Stretched out limbs can be pushed even further, but will incur 1 DAMAGE for every additional ten feet of stretch. You take +1 DAMAGE when enemies specifically target stretched-out limbs.",
     item: {
       name: "Elastic bodysuit",
       description: "0 ARMOR, up to 1000 sq. ft. of fabric",
     },
-    stat: "forceful",
+    stat: "STR",
     adjustment: -1,
   },
   {
@@ -1840,7 +1835,7 @@ export const stat_traits: statTrait[] = [
       name: "Special cigar",
       description: "+1D6 HP, one use",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: -2,
   },
   {
@@ -1851,7 +1846,7 @@ export const stat_traits: statTrait[] = [
       name: "Box of tea lights",
       description: "one circle's worth, one use",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: 1,
   },
   {
@@ -1862,7 +1857,7 @@ export const stat_traits: statTrait[] = [
       name: "Grippy socks",
       description: "prevent you from slipping",
     },
-    stat: "forceful",
+    stat: "STR",
     adjustment: -2,
   },
   {
@@ -1873,7 +1868,7 @@ export const stat_traits: statTrait[] = [
       name: "Supply radio",
       description: "three uses",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: 1,
   },
   {
@@ -1884,7 +1879,7 @@ export const stat_traits: statTrait[] = [
       name: "Camera drone",
       description: "1 HP, one use",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: 1,
   },
   {
@@ -1895,7 +1890,7 @@ export const stat_traits: statTrait[] = [
       name: "In-vivo symbiote",
       description: "+2 ARMOR vs. attacks from behind",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: -1,
   },
   {
@@ -1906,7 +1901,7 @@ export const stat_traits: statTrait[] = [
       name: "Infantry-scale railgun",
       description: "1D6+2 DAMAGE",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: 1,
   },
   {
@@ -1917,7 +1912,7 @@ export const stat_traits: statTrait[] = [
       name: "Night vision goggles",
       description: "can see at night",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: 2,
   },
   {
@@ -1928,7 +1923,7 @@ export const stat_traits: statTrait[] = [
       name: "Pins and medals",
       description: "command respect",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: 2,
   },
   {
@@ -1939,7 +1934,7 @@ export const stat_traits: statTrait[] = [
       name: "Tattered gi",
       description: "1 ARMOR",
     },
-    stat: "forceful",
+    stat: "STR",
     adjustment: -1,
   },
   {
@@ -1950,18 +1945,18 @@ export const stat_traits: statTrait[] = [
       name: "Psychic amplifier",
       description: "accessory",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: 1,
   },
   {
     name: "TELEPORT",
     description:
-      "You can teleport yourself (and any items you are wearing or holding) to a safe location within your line of sight at will. If you want to teleport under fire or to somewhere you can't see, roll +TACTICAL to avoid accidents.",
+      "You can teleport yourself (and any items you are wearing or holding) to a safe location within your line of sight at will. If you want to teleport under fire or to somewhere you can't see, roll +INT to avoid accidents.",
     item: {
       name: "Flare gun",
       description: "1D6 DAMAGE",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: 2,
   },
   {
@@ -1972,18 +1967,18 @@ export const stat_traits: statTrait[] = [
       name: "Sweeping cape",
       description: "1 ARMOR, accessory",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: 1,
   },
   {
     name: "THIEF",
     description:
-      "You may roll +REFLEXIVE to teleport an object you can see into your hands. On a failure, you take something else as well—the GM will tell you what.",
+      "You may roll +DEX to teleport an object you can see into your hands. On a failure, you take something else as well—the GM will tell you what.",
     item: {
       name: "Smoke grenade",
       description: "one use",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: 1,
   },
   {
@@ -1994,7 +1989,7 @@ export const stat_traits: statTrait[] = [
       name: "Anomalous weapon",
       description: "choose any",
     },
-    stat: "forceful",
+    stat: "STR",
     adjustment: 1,
   },
   {
@@ -2005,18 +2000,18 @@ export const stat_traits: statTrait[] = [
       name: "Claymore mine",
       description: "2D6 DAMAGE, one use",
     },
-    stat: "forceful",
+    stat: "STR",
     adjustment: -1,
   },
   {
     name: "TRIPPER",
     description:
-      "You are a psychedelics enthusiast. When you have some time to relax, you can drop a tab to expand your consciousness and take +2 to your next CREATIVE roll.",
+      "You are a psychedelics enthusiast. When you have some time to relax, you can drop a tab to expand your consciousness and take +2 to your next WIS roll.",
     item: {
       name: "Acid tab",
       description: "one use",
     },
-    stat: "wardice",
+    stat: "WIS",
     adjustment: 1,
   },
   {
@@ -2027,18 +2022,18 @@ export const stat_traits: statTrait[] = [
       name: "Copy of FIST: Ultra Edition",
       description: "",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: 2,
   },
   {
     name: "TURNCOAT",
     description:
-      "At one point, you belonged to an enemy faction of your choice. You no longer serve them. When you run up against this faction, the GM will tell you something tactically important about them.",
+      "At one point, you belonged to an enemy faction of your choice. You no longer serve them. When you run up against this faction, the GM will tell you something INTly important about them.",
     item: {
       name: "Enemy uniform",
       description: "1 ARMOR, blend in with faction",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: 1,
   },
   {
@@ -2049,7 +2044,7 @@ export const stat_traits: statTrait[] = [
       name: "Mini-turret",
       description: "1D6+TAC DAMAGE",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: 1,
   },
   {
@@ -2060,7 +2055,7 @@ export const stat_traits: statTrait[] = [
       name: "Hand wraps",
       description: "3 DAMAGE",
     },
-    stat: "forceful",
+    stat: "STR",
     adjustment: 1,
   },
   {
@@ -2071,18 +2066,18 @@ export const stat_traits: statTrait[] = [
       name: "Full-body bandages",
       description: "1 ARMOR",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: -2,
   },
   {
     name: "UNFEELING",
     description:
-      "You experience no emotional interoception, and must rely on some other rationale to motivate your decisions under pressure. When you would roll CREATIVE to deal with something emotional, you may describe how you're using a different attribute and roll using that instead, adding your inverted CREATIVE score on top (e.g. +1 if you have -1 CRE, or -2 if you have +2 CRE).",
+      "You experience no emotional interoception, and must rely on some other rationale to motivate your decisions under pressure. When you would roll WIS to deal with something emotional, you may describe how you're using a different attribute and roll using that instead, adding your inverted WIS score on top (e.g. +1 if you have -1 CRE, or -2 if you have +2 CRE).",
     item: {
       name: "Brain teaser puzzle",
       description: "e.g. Rubik's cube",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: -1,
   },
   {
@@ -2093,7 +2088,7 @@ export const stat_traits: statTrait[] = [
       name: "Gothic amulet",
       description: "used to turn into a bat and back",
     },
-    stat: "forceful",
+    stat: "STR",
     adjustment: -2,
   },
   {
@@ -2104,7 +2099,7 @@ export const stat_traits: statTrait[] = [
       name: "Signature vehicle",
       description: "player's choice of type",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: 1,
   },
   {
@@ -2115,7 +2110,7 @@ export const stat_traits: statTrait[] = [
       name: "Indestructible vial",
       description: "easily concealed",
     },
-    stat: "forceful",
+    stat: "STR",
     adjustment: -1,
   },
   {
@@ -2132,12 +2127,12 @@ export const stat_traits: statTrait[] = [
   {
     name: "VOLATILE",
     description:
-      "Your menagerie of ultrahuman abilities is virtually infinite in scope, but which powers manifest themselves (and when) is completely unpredictable. At the beginning of each mission, roll a trait (D666). That trait replaces this trait (VOLATILE) until the end of the mission (although you also retain VOLATILE's containment armor and -2 TACTICAL penalty). Reroll your trait when you rest, use a WAR DIE, or take 6+ DAMAGE.",
+      "Your menagerie of ultrahuman abilities is virtually infinite in scope, but which powers manifest themselves (and when) is completely unpredictable. At the beginning of each mission, roll a trait (D666). That trait replaces this trait (VOLATILE) until the end of the mission (although you also retain VOLATILE's containment armor and -2 INT penalty). Reroll your trait when you rest, use a WAR DIE, or take 6+ DAMAGE.",
     item: {
       name: "Containment armor",
       description: "2 ARMOR",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: -2,
   },
   {
@@ -2148,7 +2143,7 @@ export const stat_traits: statTrait[] = [
       name: "Laser sight",
       description: "attach to weapon for +1 on attack rolls",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: 1,
   },
   {
@@ -2159,18 +2154,18 @@ export const stat_traits: statTrait[] = [
       name: "Arms handbook",
       description: "see enemies' DAMAGE",
     },
-    stat: "tactical",
+    stat: "INT",
     adjustment: 1,
   },
   {
     name: "WEB",
     description:
-      "Your web-shooters spray pressurized jets of sticky, artificial fiber with high tensile strength and a slow-dissolving chemical makeup. You may roll +REFLEXIVE to incapacitate anyone by wrapping them in webs, and you may always deftly hang or swing from your webs without rolling the dice.",
+      "Your web-shooters spray pressurized jets of sticky, artificial fiber with high tensile strength and a slow-dissolving chemical makeup. You may roll +DEX to incapacitate anyone by wrapping them in webs, and you may always deftly hang or swing from your webs without rolling the dice.",
     item: {
       name: "Web-shooters",
       description: "accessory",
     },
-    stat: "reflexive",
+    stat: "DEX",
     adjustment: 1,
   },
   {
@@ -2181,7 +2176,7 @@ export const stat_traits: statTrait[] = [
       name: "Heavy riot shield",
       description: "2 ARMOR, equip as weapon",
     },
-    stat: "forceful",
+    stat: "STR",
     adjustment: 1,
   },
   {
@@ -2192,7 +2187,7 @@ export const stat_traits: statTrait[] = [
       name: "Fur cloak",
       description: "pacifies nearby animals, accessory",
     },
-    stat: "creative",
+    stat: "CHA",
     adjustment: 1,
   },
   {
@@ -2203,7 +2198,7 @@ export const stat_traits: statTrait[] = [
       name: "Platinum chip",
       description: "extremely valuable",
     },
-    stat: "wardice",
+    stat: "WIS",
     adjustment: 1,
   },
   {
@@ -2214,7 +2209,7 @@ export const stat_traits: statTrait[] = [
       name: "Old sunglasses",
       description: "see through disguises",
     },
-    stat: "Creative",
+    stat: "CHA",
     adjustment: +1,
   },
 ];
